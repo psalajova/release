@@ -18,9 +18,20 @@ groups:
   aos-qe:
     clusters:
     - app.ci
+  aos-staff-engineers:
+    clusters:
+    - app.ci
+    cluster-groups:
+    - dp-managed
+    secret_collections:
+    - secrets2
+    - secrets1
   art-admins:
     clusters:
     - app.ci
+    secret_collections:
+    - art-admins-secrets
+    - secrets1
   build-api-team:
     clusters:
     - app.ci
@@ -171,6 +182,9 @@ groups:
     clusters:
     - app.ci
   test-platform-ci-monitoring-viewers:
+    secret_collections:
+    - dptp-secrets
+    - secrets2
     rename_to: ci-monitoring-viewers
   test-platform-ci-sudoers:
     cluster_groups:
