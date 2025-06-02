@@ -24,13 +24,11 @@ groups:
     cluster-groups:
     - dp-managed
     secret_collections:
-    - secrets2
     - secrets1
   art-admins:
     clusters:
     - app.ci
     secret_collections:
-    - art-admins-secrets
     - secrets1
   build-api-team:
     clusters:
@@ -183,8 +181,8 @@ groups:
     - app.ci
   test-platform-ci-monitoring-viewers:
     secret_collections:
-    - dptp-secrets
-    - secrets2
+    - secrets1
+    - psalajov
     rename_to: ci-monitoring-viewers
   test-platform-ci-sudoers:
     cluster_groups:
