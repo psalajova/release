@@ -2,23 +2,11 @@ These manifests deploy the [**Secrets Store CSI driver**](https://secrets-store-
 and the [**Google Secret Manager Provider for Secret Store CSI Driver**](https://github.com/GoogleCloudPlatform/secrets-store-csi-driver-provider-gcp)
 in order to utilize the GCP Secret Manager.
 
-## Changes to upstream manifests
-The following modifications needed to be made to the upstream manifests.
+## Secrets Store CSI Driver
 
-### Changes to Secrets Store CSI Driver
-All manifests, except for `csidriver.yaml`, were deployed as described [here](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#alternatively-deployment-using-yamls).
-By default, volumes backed by Container Storage Interface (CSI) drivers can only be used
-with a PersistentVolume and PersistentVolumeClaim object combination. To enable Pods to define inline volumes, 
-the following label was added to the metadata section in `csidriver.yaml`, 
-as explained in this [OpenShift documentation](https://docs.openshift.com/container-platform/4.17/storage/container_storage_interface/ephemeral-storage-csi-inline.html#overview-admission-plugin):
-```yaml
-  labels:
-     security.openshift.io/csi-ephemeral-volume-profile: baseline
-```
-This configuration allows a Pod to mount CSI inline ephemeral volumes when 
-the namespace in which the Pod is running is governed by a pod security standard (privileged/baseline/restricted) 
-that is the same or higher than the one specified by the label.
-
+The driver is managed by the Red Hat [Secrets Store CSI Driver Operator](https://docs.openshift.com/container-platform/latest/storage/container_storage_interface/persistent-storage-csi-secrets-store.html),
+installed via OLM (`operator.yaml`). The operator handles the driver DaemonSet, CRDs, RBAC,
+and CSIDriver resource in the `openshift-cluster-csi-drivers` namespace.
 
 ### Changes to GCP Provider
 The following changes needed to be done to the [upstream manifest](https://github.com/GoogleCloudPlatform/secrets-store-csi-driver-provider-gcp/blob/7218875135b87ca930b9bcb97231b1ede4e93e1a/deploy/provider-gcp-plugin.yaml) 
